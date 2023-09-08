@@ -30,8 +30,7 @@ const renderPokemons = (listPokemons) => {
             <img src="${pokemon.image}" alt="">
             <h3>Habilidades:</h3>
             <div class="pokemon__abilities">
-                <span>overgrow</span>
-                <span>chlorophyll</span>
+            ${renderAbilities(pokemon.abilities)}
             </div>
             <h3>Experiencia: <span>${pokemon.experience}</span></h3>
             <h3>Altura: <span>${pokemon.height}</span></h3>
@@ -41,3 +40,11 @@ const renderPokemons = (listPokemons) => {
 }
 
 getPokemons();
+
+const renderAbilities = (abilities) => {
+    let text = '';
+    abilities.forEach(element => {
+        text += `<span>${element.ability.name} </span>`
+    });
+    return text
+}
