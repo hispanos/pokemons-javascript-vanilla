@@ -1,8 +1,12 @@
 const pokemonsContainer = document.getElementById('pokemonsContainter');
+const btnNext = document.querySelector('#btnNext');
+
+let nextURL = 'https://pokeapi.co/api/v2/pokemon/';
 
 const getPokemons = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
+    const response = await fetch(nextURL);
     const data = await response.json();
+    nextURL = data.next
     const listPokemons = [];
     for (let index = 0; index < data.results.length; index++) {
         const pokemon = data.results[index];
@@ -48,3 +52,8 @@ const renderAbilities = (abilities) => {
     });
     return text
 }
+
+btnNext.addEventListener('click', () => {
+    getPokemons();
+    pokemonsContainer.innerHTML = 'Cargando...';
+})
